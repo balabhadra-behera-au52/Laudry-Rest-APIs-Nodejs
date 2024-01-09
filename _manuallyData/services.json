@@ -1,0 +1,39 @@
+[
+    {
+        "Category": "Wash & Fold",
+        "SubCategories": [
+            {
+                "Name": "Shirt",
+                "Price": 3,
+                "Image": "",
+                "Currency": "AED"
+            },
+            {
+                "Name": "Shirt",
+                "Price": 3,
+                "Image": "",
+                "Currency": "AED"
+            },
+            {
+                "Name": "Shirt",
+                "Price": 3,
+                "Image": "",
+                "Currency": "AED"
+            },
+            {
+                "Name": "Shirt",
+                "Price": 3,
+                "Image": "",
+                "Currency": "AED"
+            },
+            {
+                "Name": "Shirt",
+                "Price": 3,
+                "Image": "",
+                "Currency": "AED"
+            }
+        ],
+        "City": "Al Baraha",
+        "Status": "Active"
+    }
+]

@@ -1,0 +1,993 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Laundry App API",
+    "version": "1.0.0",
+    "description": "API documentation for the Laundry App"
+  },
+  "host": "localhost:3000",
+  "basePath": "/v1",
+  "schemes": ["http"],
+  "servers":[{
+    "url":"localhost:3000"
+  }],
+  "tags": [
+    {
+      "name": "User",
+      "description": "Operations related to User management"
+    },
+    {
+      "name": "Runner",
+      "description": "Operations related to Runner management"
+    },
+    {
+      "name": "Laundry Man",
+      "description": "Operations related to Laundry Man management"
+    },
+    {
+      "name": "Orders",
+      "description": "Operations related to Order management"
+    },
+    {
+      "name": "Wallet",
+      "description": "Operations related to Wallet management"
+    }
+  ],
+  "paths": {
+    "/auth/user/otp": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Send OTP",
+        "parameters": [
+          {
+            "name": "Phone",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Phone": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/auth/user/create/{userId}": {
+      "post": {
+        "tags": ["User"],
+        "summary":"Sign Up/Login",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Phone": {
+                  "type": "integer"
+                },
+                "Otp": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/user/find/{userId}": {
+      "get": {
+        "tags": ["User"],
+        "summary":"Find user by User Id",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/user/update/{userId}": {
+      "patch": {
+        "tags": ["User"],
+        "summary":"Update User by User Id",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "FirstName": {
+                  "type": "string"
+                },
+                "LastName": {
+                  "type": "string"
+                },
+                "Email": {
+                  "type": "string"
+                },
+                "DateOfBirth": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/user/all": {
+      "get": {
+        "tags": ["User"],
+        "summary":"Get All Users",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema":{
+              "type": "number"
+            }
+          }],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/user/newaddress/{userId}": {
+      "post": {
+        "tags": ["User"],
+        "summary":"Add New Address Using User ID",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Addresses": {
+                  "type": "object",
+                  "properties": {
+                    "ContactName": {
+                      "type": "string"
+                    },
+                    "ContactNumber": {
+                      "type": "string"
+                    },
+                    "MakeDefault": {
+                      "type": "boolean"
+                    },
+                    "OpenOnSunday": {
+                      "type": "boolean"
+                    },
+                    "OpenOnSaturday": {
+                      "type": "boolean"
+                    },
+                    "Type": {
+                      "type": "string"
+                    },
+                    "Apartment": {
+                      "type": "string"
+                    },
+                    "FlatNo": {
+                      "type": "string"
+                    },
+                    "Street": {
+                      "type": "string"
+                    },
+                    "City": {
+                      "type": "string"
+                    },
+                    "State": {
+                      "type": "string"
+                    },
+                    "PostalCode": {
+                      "type": "string"
+                    },
+                    "PickUpDetail": {
+                      "type": "object",
+                      "properties": {
+                        "Time": {
+                          "type": "string"
+                        },
+                        "Date": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/user/rating/{userId}": {
+      "post": {
+        "tags": ["User"],
+        "summary":"Rate Order by UserId",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "OrderId": {
+                  "type": "string"
+                },
+                "Rating": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/orders/new/{userId}": {
+      "post": {
+        "tags": ["Orders"],
+        "summary": "Create a new order by User ID",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Order created successfully"
+          }
+        },
+        "parameters": [  {
+          "name": "userId",
+          "in": "path",
+          "type": "string",
+          "required": true,
+          "description": "User ID"
+        },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/NewOrderRequest"
+            }
+          }
+        ]
+      }
+    },
+    "/orders/find/{orderId}": {
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Get an order by Order ID",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "description": "Order ID"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Order details retrieved successfully"
+          }
+        }
+      }
+    },
+    "/orders/user/{userId}": {
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Get orders by User ID",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "description": "User ID"
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "User's orders retrieved successfully"
+          }
+        }
+      }
+    },
+    "/orders/update/{orderId}": {
+      "patch": {
+        "tags": ["Orders"],
+        "summary": "Update an order by Order ID",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "description": "Order ID"
+          },  {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateOrderRequest"
+            }
+          }
+        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Order updated successfully"
+          }
+        }
+      }
+    },
+    "/auth/wallet/addmoney/{userId}": {
+      "post": {
+        "tags": ["Wallet"],
+        "summary":"Add Money to Wallet by User ID",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Amount": {
+                  "type": "number"
+                },
+                "Status": {
+                  "type": "string"
+                },
+                "Type": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/user/resetpassword": {
+      "post": {
+        "tags": ["User"],
+        "summary":"Reset Password",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Email": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/auth/runner/login": {
+      "post": {
+        "tags": ["Runner"],
+        "summary":"Login as a Runner",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Email": {
+                    "type": "string"
+                  },
+                  "Password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful"
+          }
+        }
+      }
+    },
+    "/auth/runner/create": {
+      "post": {
+        "tags": ["Runner"],
+        "summary":"Sign Up as a Runner",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "FirstName": {
+                    "type": "string"
+                  },
+                  "LastName": {
+                    "type": "string"
+                  },
+                  "Email": {
+                    "type": "string"
+                  },
+                  "Phone": {
+                    "type": "string"
+                  },
+                  "Password": {
+                    "type": "string"
+                  },
+                  "Address": {
+                    "type": "string"
+                  },
+                  "DateOfBirth": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "VehicleType": {
+                    "type": "string"
+                  },
+                  "VehicleNumber": {
+                    "type": "string"
+                  },
+                  "CurrentLocation": {
+                    "type": "string"
+                  },
+                  "ActivityStatus": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Sign Up successful"
+            }
+          }
+        }
+      }
+    },
+    "/runner/find/{runnerId}": {
+      "get": {
+        "tags": ["Runner"],
+        "summary":"Find Runner by Runner ID",
+        "parameters": [
+          {
+            "name": "runnerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Runner found"
+          }
+        }
+      }
+    },
+    "/runner/orders/{runnerId}": {
+      "get": {
+        "tags": ["Runner"],
+        "summary":"Find Pickup Orders by Runner ID",
+        "parameters": [
+          {
+            "name": "runnerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pickup Orders found"
+          }
+        }
+      }
+    },
+    "/runner/all/": {
+      "get": {
+        "tags": ["Runner"],
+        "summary":"Get All Runners",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema":{
+              "type": "number"
+            }
+          }],
+        "responses": {
+          "200": {
+            "description": "List of Runners"
+          }
+        }
+      }
+    },
+    "/runner/update/{runnerId}": {
+      "patch": {
+        "tags": ["Runner"],
+        "summary":"Update Runner by Runner ID",
+        "parameters": [
+          {
+            "name": "runnerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "FirstName": {
+                    "type": "string"
+                  },
+                  "LastName": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Runner updated successfully"
+            }
+          }
+        }
+      }
+    },
+    "/runner/updateorder/{orderId}": {
+      "patch": {
+        "tags": ["Runner"],
+        "summary":"Update Pickup Order by Runner ID",
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "OrderId": {
+                    "type": "string"
+                  },
+                  "DeliveryStatus": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Pickup Order updated successfully"
+            }
+          }
+        }
+      }
+    },   "/v1/auth/laundryman/login": {
+      "post": {
+        "tags": ["Laundry Man"],
+        "summary":"Login",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Login credentials",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful login"
+          }
+        }
+      }
+    },
+    "/auth/laundryman/create": {
+      "post": {
+        "tags": ["Laundry Man"],
+        "summary":"Sign Up",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User registration details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SignUpRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User created"
+          }
+        }
+      }
+    },
+    "/laundryman/find/{laundryManId}": {
+      "get": {
+        "tags": ["Laundry Man"],
+        "summary":"Find Laundry Man by Laundry Man Id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "laundryManId",
+            "type": "string",
+            "required": true,
+            "description": "Laundry Man ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Laundry Man found"
+          }
+        }
+      }
+    },
+    "/laundryman/all": {
+      "get": {
+        "tags": ["Laundry Man"],
+        "summary":"Get All Laundry Mans",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema":{
+              "type": "number"
+            }
+          }],
+        "responses": {
+          "200": {
+            "description": "List of Laundry Mans"
+          }
+        }
+      }
+    },
+    "/laundryman/updateorder/{laundryManId}": {
+      "patch": {
+        "tags": ["Laundry Man"],
+        "summary":"Update Pickup Order by Laundry Man Id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "laundryManId",
+            "type": "string",
+            "required": true,
+            "description": "Laundry Man ID"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update Order details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateOrderRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order updated"
+          }
+        }
+      }
+    },
+    "/laundryman/update/{laundryManId}": {
+      "patch": {
+        "tags": ["Laundry Man"],
+        "summary":"Update Laundry Man by Laundry Man Id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "laundryManId",
+            "type": "string",
+            "required": true,
+            "description": "Laundry Man ID"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update Laundry Man details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateLaundryManRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Laundry Man updated"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LoginRequest": {
+      "type": "object",
+      "properties": {
+        "Email": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        }
+      }
+    },
+    "SignUpRequest": {
+      "type": "object",
+      "properties": {
+        "FirstName": {
+          "type": "string"
+        },
+        "LastName": {
+          "type": "string"
+        },
+        "Email": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        },
+        "Phone": {
+          "type": "string"
+        },
+        "Address": {
+          "type": "string"
+        },
+        "DateOfBirth": {
+          "type": "string"
+        },
+        "CurrentLocation": {
+          "type": "string"
+        },
+        "ActivityStatus": {
+          "type": "string"
+        },
+        "AssignedOrders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "CompletedOrders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UpdateOrderRequest": {
+      "type": "object",
+      "properties": {
+        "OrderId": {
+          "type": "string"
+        },
+        "DeliveryStatus": {
+          "type": "integer"
+        }
+      }
+    },
+    "UpdateLaundryManRequest": {
+      "type": "object",
+      "properties": {
+        "Email": {
+          "type": "string"
+        },
+        "Phone": {
+          "type": "integer"
+        }
+      }
+    },
+     "NewOrderRequest": {
+      "type": "object",
+      "properties": {
+        "Address": {
+          "$ref": "#/definitions/Address"
+        },
+        "OrderItems": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "OrderTotalCost": {
+          "type": "number"
+        },
+        "OrderStatus": {
+          "type": "string"
+        },
+        "ExpectedDeliveryTime": {
+          "type": "string"
+        },
+        "AssignedTo": {
+          "type": "string"
+        },
+        "DeliveryStatus": {
+          "type": "integer"
+        },
+        "PaymentStatus": {
+          "type": "string"
+        },
+        "PaymentMethod": {
+          "type": "string"
+        },
+        "AdditionalNotes": {
+          "type": "string"
+        }
+      }
+    },
+    "Address": {
+      "type": "object",
+      "properties": {
+        "ContactName": {
+          "type": "string"
+        },
+        "ContactNumber": {
+          "type": "string"
+        },
+        "MakeDefault": {
+          "type": "boolean"
+        },
+        "OpenOnSunday": {
+          "type": "boolean"
+        },
+        "OpenOnSaturday": {
+          "type": "boolean"
+        },
+        "Type": {
+          "type": "string"
+        },
+        "Apartment": {
+          "type": "string"
+        },
+        "FlatNo": {
+          "type": "string"
+        },
+        "Street": {
+          "type": "string"
+        },
+        "City": {
+          "type": "string"
+        },
+        "State": {
+          "type": "string"
+        },
+        "PostalCode": {
+          "type": "string"
+        },
+        "PickUpDetail": {
+          "type": "object",
+          "properties": {
+            "Time": {
+              "type": "string"
+            },
+            "Date": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
